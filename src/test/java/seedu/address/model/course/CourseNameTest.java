@@ -1,6 +1,8 @@
 package seedu.address.model.course;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -8,31 +10,34 @@ import org.junit.Test;
 import seedu.address.testutil.Assert;
 
 public class CourseNameTest {
+
     @Test
     public void constructor_null_throwsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () -> new CourseName(null));
     }
 
     @Test
-    public void constructor_invalidAddress_throwsIllegalArgumentException() {
-        String invalidCourseName = "";
-        Assert.assertThrows(IllegalArgumentException.class, () -> new CourseName(invalidCourseName));
+    public void isValidCourseName() {
+        //invalid course name
+        assertFalse(CourseName.isValidCourseName("&S*A&D!"));
+        assertFalse(CourseName.isValidCourseName(" starts with white space"));
+        assertFalse(CourseName.isValidCourseName("2138129839120"));
+
+        //valid course name
+        assertTrue(CourseName.isValidCourseName("coursename"));
     }
 
     @Test
-    public void isValidCourseName() {
-        // null address
-        Assert.assertThrows(NullPointerException.class, () -> CourseName.isValidCourseName(null));
+    public void equals() {
+        CourseName test = new CourseName("valid coursename");
+        //equal
+        assertEquals(test, test);
+        assertEquals(new CourseName("valid coursename"), test);
 
-        // invalid addresses
-        assertFalse(CourseName.isValidCourseName("")); // empty string
-        assertFalse(CourseName.isValidCourseName(" ")); // spaces only
-        assertFalse(CourseName.isValidCourseName("Software?")); //contains characters and special characters
-        assertFalse(CourseName.isValidCourseName("CS2131")); //contains characters and numbers
-        // valid addresses
-        assertTrue(CourseName.isValidCourseName("Computer Science")); //two words with one space
-        assertTrue(CourseName.isValidCourseName("Mathematics")); // one word
-        assertTrue(CourseName.isValidCourseName("Computer Science and Statistics")); //multiple spaces
-        assertTrue(CourseName.isValidCourseName("A")); //one character
+        //not equal
+        assertNotEquals(null, test);
+        assertNotEquals("somethingelse", test);
+        assertNotEquals(new CourseName("some other name"), test);
     }
+
 }

@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 
 /**
- * Represents a module's module code
+ * Represents a moduleInfo's code
  * Guarantees: immutable; is valid as declared in {@link #isValidModuleInfoCode(String)}
  */
 public class ModuleInfoCode {
@@ -22,6 +22,15 @@ public class ModuleInfoCode {
 
     public static boolean isValidModuleInfoCode(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns the level of the module represented by this {@code ModuleInfoCode}.
+     * @return The first numerical digit of this {@code ModuleInfoCode}.
+     */
+    public int getLevel() {
+        int codeNumber = Integer.parseInt(value.replaceAll("[^0-9]", ""));
+        return codeNumber / 1000;
     }
 
     public String toString() {

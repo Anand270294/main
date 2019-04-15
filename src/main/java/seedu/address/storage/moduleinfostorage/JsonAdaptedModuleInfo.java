@@ -7,7 +7,6 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.moduleinfo.ModuleInfo;
 
 
-//TODO: Find a way to split the prerequisites into class Module Info so that module infos can be linked.
 
 /**
  * Class to extract information form JSON file and convert it into ModuleInfo Objects
@@ -42,8 +41,8 @@ public class JsonAdaptedModuleInfo {
         this.credits = credits;
         this.department = department;
 
-        if (prerequisite == null) {
-            this.prerequisites = " No prerequisites needed";
+        if (prerequisite == null || prerequisite.equalsIgnoreCase("NIL")) {
+            this.prerequisites = "No prerequisites needed";
         } else {
             this.prerequisites = prerequisite;
         }

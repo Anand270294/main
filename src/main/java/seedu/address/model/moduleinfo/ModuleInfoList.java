@@ -9,7 +9,7 @@ import seedu.address.commons.util.InvalidationListenerManager;
 
 /**
  * Wraps all data at the Module Info List level
- * Duplicates are not allowed (by  comparison)
+ * Duplicates are not allowed (by comparison)
  */
 public class ModuleInfoList {
 
@@ -28,7 +28,7 @@ public class ModuleInfoList {
      */
     public void addModuleInfo(ModuleInfo module) {
         this.moduleInfoList.add(module);
-        System.out.println("new module added:" + module.getCode());
+        //System.out.println("new module added:" + module.getCodeString());
     }
 
     /**
@@ -39,11 +39,24 @@ public class ModuleInfoList {
     public ModuleInfo getModule(String code) {
         ModuleInfo module = null;
         for (int i = 0; i < moduleInfoList.size(); i++) {
-            if (moduleInfoList.get(i).getCode().equals(code)) {
+            if (moduleInfoList.get(i).getCodeString().equals(code)) {
                 module = moduleInfoList.get(i);
             }
         }
         return module;
+    }
+
+    /**
+     * Creates a PreRequisite Tree for each ModuleInfo Class
+     * @return boolean isGenerated
+     */
+    public boolean generatePrerequisites() {
+        boolean isGenerated = false;
+
+        for (int i = 0; i < moduleInfoList.size(); i++) {
+            ModuleInfo module = moduleInfoList.get(i);
+        }
+        return isGenerated;
     }
 
     public ObservableList<ModuleInfo> getObservableList() {
